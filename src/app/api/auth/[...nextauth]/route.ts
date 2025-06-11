@@ -11,8 +11,8 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      async authorize(credentials): Promise<any | null> {
+    
+      async authorize(credentials): Promise<never | null> {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Missing email or password.");
         }
