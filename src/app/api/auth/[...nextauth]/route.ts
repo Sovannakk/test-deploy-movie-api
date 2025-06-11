@@ -1,6 +1,6 @@
 import { MovieService } from "@/service/MovieService";
 import { LoginRequest } from "@/types/Movie";
-import NextAuth, { AuthOptions } from "next-auth";  
+import NextAuth, { AuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
@@ -11,8 +11,8 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-    
-      async authorize(credentials): Promise<never | null> {
+
+      async authorize(credentials): Promise<User | null> {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Missing email or password.");
         }
@@ -24,7 +24,12 @@ export const authOptions: AuthOptions = {
 
         const res = await MovieService.LoginService(data);
 
-        return res.payload;
+        if (res?.payload?.token) {
+          return {
+            id: res.payload.token,
+          };
+        }
+        return null;
       },
     }),
   ],
@@ -48,7 +53,7 @@ export const authOptions: AuthOptions = {
     },
 
     async session({ session, token }) {
-      session.token = token.token as string;
+      session.token = token.id as string;
       return session;
     },
   },
