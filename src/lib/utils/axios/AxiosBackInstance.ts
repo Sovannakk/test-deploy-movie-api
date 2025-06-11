@@ -1,9 +1,8 @@
 // lib/axios-instance.ts
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-
+import { authOptions } from "@/lib/auth";
 export const axiosBackInstance: AxiosInstance = axios.create({
   baseURL: "http://34.87.39.167:9082/api/v1",
   headers: {

@@ -1,5 +1,5 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Provider } from "@/context/provider";
+import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth/next";
 import "./globals.css";
 
