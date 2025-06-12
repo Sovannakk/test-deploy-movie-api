@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import { authOptions } from "@/lib/auth";
 export const axiosBackInstance: AxiosInstance = axios.create({
-  baseURL: "http://34.87.39.167:9082/api/v1",
+  baseURL: "https://test-movie-api.darasr.online/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
